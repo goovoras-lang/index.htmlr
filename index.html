@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rasofranceT - Investissement & Revenus</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        goldDark: '#AA7C11',
+                        darkBg: '#0F172A',
+                        cardBg: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0F172A;
+            color: #F8FAFC;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+        .gold-border {
+            border: 1px solid #D4AF37;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 100%);
+        }
+        .gold-text {
+            color: #D4AF37;
+        }
+    </style>
+</head>
+<body class="pb-24 pt-16">
+
+    <!-- Header Fixe -->
+    <header class="fixed top-0 left-0 right-0 bg-slate-900 border-b border-amber-500/30 px-4 py-3 flex justify-between items-center z-50">
+        <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-mobile-screen-button text-amber-400 text-xl"></i>
+            <span class="font-bold text-xl tracking-wider text-amber-400">rasofranceT</span>
+        </div>
+        <div class="flex items-center space-x-3">
+            <span class="text-xs bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full border border-amber-500/30">
+                Solde: <strong id="balanceDisplay" class="text-white">0 FCFA</strong>
+            </span>
+        </div>
+    </header>
+
+    <!-- Bannière d'Invitation / Parrainage -->
+    <div id="inviteBanner" class="mx-4 mt-2 mb-4 p-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-slate-800 border border-amber-500/40 flex justify-between items-center shadow-lg">
+        <div>
+            <p class="text-xs text-amber-300 font-bold"><i class="fa-solid fa-users text-amber-400 mr-1"></i> Programme de Parrainage</p>
+            <p class="text-xs text-slate-300">Gagnez 10% sur le produit 3 000 FCFA & 20% sur le VIP 15 000 FCFA !</p>
+        </div>
+        <button onclick="shareInviteLink()" class="px-3 py-1.5 gold-gradient text-slate-950 text-xs font-bold rounded-lg shadow">
+            Inviter
+        </button>
+    </div>
+
+    <!-- Conteneur Principal -->
+    <main class="max-w-lg mx-auto px-4">
+        
+        <!-- PAGE 1: ACCUEIL / CATALOGUE -->
+        <section id="pageAccueil" class="space-y-4">
+            <div class="text-center py-2">
+                <h2 class="text-lg font-bold text-amber-400">Catalogue des Equipements</h2>
+                <p class="text-xs text-slate-400">Choisissez vos produits et gérez vos profits</p>
+            </div>
+
+            <!-- Produit 1: Mini iPhone 15 -->
+            <div class="bg-slate-800 rounded-2xl p-4 border border-slate-700 shadow-xl relative overflow-hidden">
+                <div class="flex items-center space-x-4">
+                    <div class="w-20 h-20 bg-slate-900 rounded-xl flex items-center justify-center border border-amber-500/20">
+                        <i class="fa-solid fa-mobile-screen text-4xl text-amber-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-white text-base">Mini iPhone 15</h3>
+                        <p class="text-xs text-amber-400 font-semibold">3 000 FCFA</p>
+                        <p class="text-xs text-slate-400 mt-1">Génération : 5 jours de retraits + 3 jours de grâce pour équiper le VIP 15 000 FCFA (Revenus à vie).</p>
+                        <p class="text-xs text-slate-500 mt-1">Limite : Max 2 unités par client</p>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-between items-center pt-3 border-t border-slate-700">
+                    <span id="p1Count" class="text-xs text-slate-400">Possédé: 0 / 2</span>
+                    <button onclick="buyProduct(1)" class="px-4 py-2 gold-gradient text-slate-950 font-bold text-xs rounded-xl shadow-md hover:brightness-110 active:scale-95 transition">
+                        Posséder (3 000 FCFA)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Produit 2: Mini iPhone 15 Pro Max -->
+            <div class="bg-slate-800 rounded-2xl p-4 border border-amber-500/40 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-amber-500 text-slate-950 text-[10px] font-bold px-3 py-0.5 rounded-bl-lg">
+                    VIP PRO
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="w-20 h-20 bg-slate-900 rounded-xl flex items-center justify-center border border-amber-500/40">
+                        <i class="fa-solid fa-mobile-retro text-4xl text-amber-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-amber-400 text-base">Mini iPhone 15 Pro Max</h3>
+                        <p class="text-xs text-white font-semibold">15 000 FCFA</p>
+                        <p class="text-xs text-slate-300 mt-1">Cycle 7 jours (22 500 FCFA de profit) + Débloque les revenus à vie des équipements 3 000 FCFA.</p>
+                        <p class="text-xs text-slate-400 mt-1">Limite : Max 5 unités par client</p>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-between items-center pt-3 border-t border-slate-700">
+                    <span id="p2Count" class="text-xs text-slate-400">Possédé: 0 / 5</span>
+                    <button onclick="buyProduct(2)" class="px-4 py-2 gold-gradient text-slate-950 font-bold text-xs rounded-xl shadow-md hover:brightness-110 active:scale-95 transition">
+                        Posséder (15 000 FCFA)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: PRODUITS EQUIPES -->
+        <section id="pageEquipes" class="hidden space-y-4">
+            <div class="text-center py-2">
+                <h2 class="text-lg font-bold text-amber-400">Vos Produits Équipés</h2>
+                <p class="text-xs text-slate-400">Suivi en direct de votre génération de revenus</p>
+            </div>
+
+            <!-- Cartes de Bonus -->
+            <div class="grid grid-cols-2 gap-3">
+                <div id="bonus30kCard" class="bg-slate-800 p-3 rounded-xl border border-slate-700 text-center">
+                    <p class="text-[11px] text-slate-400">Bonus 3 000 FCFA</p>
+                    <p class="text-sm font-bold text-amber-400">30 000 FCFA</p>
+                    <button id="btnBonus30k" onclick="claimBonus(1)" class="mt-2 w-full py-1 text-[10px] bg-slate-700 text-slate-400 rounded-lg font-bold" disabled>
+                        Non éligible
+                    </button>
+                </div>
+                <div id="bonus100kCard" class="bg-slate-800 p-3 rounded-xl border border-slate-700 text-center">
+                    <p class="text-[11px] text-slate-400">Bonus 15 000 FCFA</p>
+                    <p class="text-sm font-bold text-amber-400">100 000 FCFA</p>
+                    <button id="btnBonus100k" onclick="claimBonus(2)" class="mt-2 w-full py-1 text-[10px] bg-slate-700 text-slate-400 rounded-lg font-bold" disabled>
+                        Non éligible
+                    </button>
+                </div>
+            </div>
+
+            <!-- Liste des Équipements -->
+            <div id="equippedList" class="space-y-3">
+                <!-- Généré par JS -->
+            </div>
+        </section>
+
+        <!-- PAGE 3: DEPOT / RETRAIT -->
+        <section id="pageDepotRetrait" class="hidden space-y-4">
+            <div class="text-center py-2">
+                <h2 class="text-lg font-bold text-amber-400">Dépôt & Retrait</h2>
+                <p class="text-xs text-slate-400">Paiement Marchand PayDunya / YasTogo / Flooz</p>
+            </div>
+
+            <!-- Onglets Dépôt / Retrait -->
+            <div class="flex bg-slate-800 p-1 rounded-xl border border-slate-700">
+                <button id="tabDepotBtn" onclick="switchFinanceTab('depot')" class="flex-1 py-2 text-xs font-bold rounded-lg bg-amber-500 text-slate-950">
+                    Dépôt (Ouvert 24h/7)
+                </button>
+                <button id="tabRetraitBtn" onclick="switchFinanceTab('retrait')" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-400">
+                    Retrait (15h00 - 06h00 GMT)
+                </button>
+            </div>
+
+            <!-- Section Dépôt -->
+            <div id="sectionDepot" class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-4">
+                <p class="text-xs text-slate-300">
+                    Effectuez votre dépôt instantané via <strong>PayDunya Social Shop</strong>.
+                </p>
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Montant à déposer (FCFA)</label>
+                    <input type="number" id="depotAmount" min="3000" placeholder="Minimum 3 000 FCFA" value="3000"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+                </div>
+                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-700/50 text-[11px] text-slate-400 space-y-1">
+                    <p class="text-amber-400 font-bold mb-1"><i class="fa-solid fa-file-contract mr-1"></i> Règlement Dépôt :</p>
+                    <p>1. Entrez le montant égal ou supérieur à 3 000 FCFA.</p>
+                    <p>2. Cliquez sur "Payer via PayDunya" pour ouvrir la caisse sécurisée.</p>
+                    <p>3. Effectuez le paiement puis validez pour créditer votre compte.</p>
+                </div>
+                <button onclick="submitDepot()" class="w-full py-3 gold-gradient text-slate-950 font-bold text-sm rounded-xl shadow-lg">
+                    <i class="fa-solid fa-lock mr-2"></i> Payer via PayDunya Social Shop
+                </button>
+            </div>
+
+            <!-- Section Retrait -->
+            <div id="sectionRetrait" class="hidden bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-4">
+                <div id="timeStatusBox" class="p-2.5 rounded-xl bg-slate-900 text-xs text-center font-semibold border border-slate-700">
+                    <!-- Statut Horaire GMT généré en JS -->
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Montant à retirer (FCFA)</label>
+                    <input type="number" id="retraitAmount" min="2000" placeholder="Minimum 2 000 FCFA"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Numéro de Réception (YasTogo / Flooz)</label>
+                    <input type="text" id="retraitPhone" placeholder="Ex: 90000000"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+                </div>
+
+                <button onclick="submitRetrait()" class="w-full py-3 gold-gradient text-slate-950 font-bold text-sm rounded-xl shadow-lg">
+                    Demander le Retrait
+                </button>
+            </div>
+
+            <!-- Historique des Transactions -->
+            <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700">
+                <h3 class="text-xs font-bold text-amber-400 mb-3"><i class="fa-solid fa-clock-rotate-left mr-1"></i> Historique des opérations</h3>
+                <div id="transactionHistory" class="space-y-2 text-xs text-slate-400">
+                    <p class="text-center py-2">Aucune transaction enregistrée.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: SERVICE CLIENT IA -->
+        <section id="pageServiceIA" class="hidden space-y-4">
+            <div class="text-center py-2">
+                <h2 class="text-lg font-bold text-amber-400">Service Client IA & Admin</h2>
+                <p class="text-xs text-slate-400">Assistance 24/7 et validation des requêtes</p>
+            </div>
+
+            <!-- Bouton Pro WhatsApp Admin (Verrouillé) -->
+            <div class="bg-slate-800 p-3 rounded-xl border border-amber-500/30 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-brands fa-whatsapp text-2xl text-emerald-400"></i>
+                    <div>
+                        <p class="text-xs font-bold text-white">Support WhatsApp Direct Admin</p>
+                        <p class="text-[10px] text-amber-400">Réservé aux Clients VIP (15 000 FCFA)</p>
+                    </div>
+                </div>
+                <button onclick="tryAccessWhatsappAdmin()" class="px-3 py-1.5 bg-slate-700 text-slate-300 text-xs font-bold rounded-lg border border-slate-600">
+                    <i class="fa-solid fa-lock text-amber-400 mr-1"></i> Débloquer
+                </button>
+            </div>
+
+            <!-- Chat IA -->
+            <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden flex flex-col h-[350px]">
+                <div class="bg-slate-900 px-4 py-2.5 border-b border-slate-700 flex items-center space-x-2">
+                    <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                    <span class="text-xs font-bold text-white">Assistant IA rasofranceT</span>
+                </div>
+                <div id="chatMessages" class="flex-1 p-3 overflow-y-auto space-y-3 text-xs">
+                    <div class="bg-slate-700/60 p-2.5 rounded-xl max-w-[80%] text-slate-200">
+                        Bonjour ! Je suis l'assistant intelligent rasofranceT. Comment puis-je vous aider aujourd'hui ?
+                    </div>
+                </div>
+                <div class="p-2 bg-slate-900 border-t border-slate-700 flex space-x-2">
+                    <input type="text" id="chatInput" placeholder="Posez votre question..."
+                        class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-400">
+                    <button onclick="sendChatMessage()" class="px-4 gold-gradient text-slate-950 font-bold rounded-xl text-xs">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation du Bas (4 Onglets) -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-amber-500/30 px-2 py-2 z-50">
+        <div class="max-w-lg mx-auto flex justify-around">
+            <button onclick="showPage('Accueil')" id="navAccueil" class="flex flex-col items-center text-amber-400">
+                <i class="fa-solid fa-house text-lg"></i>
+                <span class="text-[10px] mt-0.5">Accueil</span>
+            </button>
+            <button onclick="showPage('Equipes')" id="navEquipes" class="flex flex-col items-center text-slate-400">
+                <i class="fa-solid fa-layer-group text-lg"></i>
+                <span class="text-[10px] mt-0.5">Produits Équipés</span>
+            </button>
+            <button onclick="showPage('DepotRetrait')" id="navDepotRetrait" class="flex flex-col items-center text-slate-400">
+                <i class="fa-solid fa-wallet text-lg"></i>
+                <span class="text-[10px] mt-0.5">Dépôt / Retrait</span>
+            </button>
+            <button onclick="showPage('ServiceIA')" id="navServiceIA" class="flex flex-col items-center text-slate-400">
+                <i class="fa-solid fa-headset text-lg"></i>
+                <span class="text-[10px] mt-0.5">Support IA</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MODAL PAYDUNYA SOCIAL SHOP -->
+    <div id="paydunyaModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex flex-col items-center justify-center p-4">
+        <div class="bg-slate-800 border border-amber-500/40 rounded-2xl p-4 w-full max-w-md space-y-4 relative max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                <h3 class="text-sm font-bold text-amber-400 flex items-center">
+                    <i class="fa-solid fa-shield-halved mr-2"></i> Caisse PayDunya Social Shop
+                </h3>
+                <button onclick="closePaydunyaModal()" class="text-slate-400 hover:text-white text-lg font-bold">&times;</button>
+            </div>
+            
+            <!-- Conteneur PayDunya injecté -->
+            <div id="paydunyasocialshop-page" class="bg-white rounded-xl p-3 min-h-[300px] text-slate-900 text-xs">
+                Veuillez patienter pendant le chargement de votre page PayDunya Social Shop...
+            </div>
+
+            <div class="pt-2 flex flex-col space-y-2">
+                <button onclick="confirmPaydunyaDeposit()" class="w-full py-2.5 gold-gradient text-slate-950 font-bold text-xs rounded-xl shadow">
+                    J'ai terminé mon paiement (Créditer mon solde)
+                </button>
+                <button onclick="closePaydunyaModal()" class="w-full py-2 bg-slate-700 text-slate-300 rounded-xl text-xs font-bold">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIQUE JAVASCRIPT -->
+    <script>
+        // État Global de l'Application
+        let state = {
+            balance: 0,
+            activeProducts: [],
+            purchasedCounts: { 1: 0, 2: 0 },
+            claimedBonuses: { 1: false, 2: false },
+            transactions: [],
+            hasDiscoveredTax: false
+        };
+
+        let currentDepotAmount = 3000;
+
+        // Chargement local
+        function loadState() {
+            const saved = localStorage.getItem('rasofranceT_state');
+            if (saved) {
+                try { state = Object.assign(state, JSON.parse(saved)); } catch(e){}
+            }
+            updateUI();
+        }
+
+        function saveState() {
+            localStorage.setItem('rasofranceT_state', JSON.stringify(state));
+            updateUI();
+        }
+
+        // Navigation entre Pages
+        function showPage(pageName) {
+            ['Accueil', 'Equipes', 'DepotRetrait', 'ServiceIA'].forEach(p => {
+                document.getElementById('page' + p).classList.add('hidden');
+                document.getElementById('nav' + p).className = "flex flex-col items-center text-slate-400";
+            });
+            document.getElementById('page' + pageName).classList.remove('hidden');
+            document.getElementById('nav' + pageName).className = "flex flex-col items-center text-amber-400";
+        }
+
+        // Achat / Équipement de Produit
+        function buyProduct(prodId) {
+            if (prodId === 1) {
+                if (state.purchasedCounts[1] >= 2) {
+                    alert("Limite atteinte : Vous ne pouvez acheter que 2 unités du Mini iPhone 15.");
+                    return;
+                }
+                if (state.balance < 3000) {
+                    alert("Solde insuffisant (3 000 FCFA requis). Veuillez effectuer un dépôt.");
+                    showPage('DepotRetrait');
+                    return;
+                }
+                state.balance -= 3000;
+                state.purchasedCounts[1]++;
+                state.activeProducts.push({
+                    id: Date.now(),
+                    type: 1,
+                    name: "Mini iPhone 15",
+                    cost: 3000,
+                    purchaseTime: Date.now(),
+                    lastHarvest: Date.now(),
+                    hourlyRate: 37.5, // 4500 FCFA sur 120h (5 jours)
+                    status: 'active'
+                });
+                alert("Félicitations ! Mini iPhone 15 acheté et équipé avec succès.");
+            } else if (prodId === 2) {
+                if (state.purchasedCounts[2] >= 5) {
+                    alert("Limite atteinte : Vous ne pouvez acheter que 5 unités du Mini iPhone 15 Pro Max.");
+                    return;
+                }
+                if (state.balance < 15000) {
+                    alert("Solde insuffisant (15 000 FCFA requis). Veuillez effectuer un dépôt.");
+                    showPage('DepotRetrait');
+                    return;
+                }
+                state.balance -= 15000;
+                state.purchasedCounts[2]++;
+                state.activeProducts.push({
+                    id: Date.now(),
+                    type: 2,
+                    name: "Mini iPhone 15 Pro Max",
+                    cost: 15000,
+                    purchaseTime: Date.now(),
+                    lastHarvest: Date.now(),
+                    hourlyRate: 133.92, // 22500 FCFA sur 168h (7 jours)
+                    status: 'active'
+                });
+                alert("Félicitations ! Mini iPhone 15 Pro Max VIP équipé avec succès.");
+            }
+            saveState();
+        }
+
+        // Récolte des Revenus
+        function harvestEarnings(prodId) {
+            const prod = state.activeProducts.find(p => p.id === prodId);
+            if (!prod) return;
+
+            const now = Date.now();
+            const hoursElapsed = (now - prod.lastHarvest) / (1000 * 3600);
+            if (hoursElapsed < 1) {
+                alert("La récolte se fait toutes les heures. Patientez encore un peu !");
+                return;
+            }
+
+            const earned = Math.floor(hoursElapsed * prod.hourlyRate);
+            state.balance += earned;
+            prod.lastHarvest = now;
+            alert("Récolte réussie ! +" + earned + " FCFA ajoutés à votre solde.");
+            saveState();
+        }
+
+        // Réclamer les Bonus
+        function claimBonus(bonusType) {
+            if (bonusType === 1) {
+                if (state.purchasedCounts[1] >= 2 && state.purchasedCounts[2] >= 1 && !state.claimedBonuses[1]) {
+                    state.balance += 30000;
+                    state.claimedBonuses[1] = true;
+                    alert("Bonus Spécial de 30 000 FCFA ajouté à votre solde !");
+                }
+            } else if (bonusType === 2) {
+                if (state.purchasedCounts[2] >= 5 && !state.claimedBonuses[2]) {
+                    state.balance += 100000;
+                    state.claimedBonuses[2] = true;
+                    alert("Bonus Grand VIP de 100 000 FCFA débloqué et ajouté !");
+                }
+            }
+            saveState();
+        }
+
+        // Finance (Dépôt & Retrait)
+        function switchFinanceTab(tab) {
+            if (tab === 'depot') {
+                document.getElementById('sectionDepot').classList.remove('hidden');
+                document.getElementById('sectionRetrait').classList.add('hidden');
+                document.getElementById('tabDepotBtn').className = "flex-1 py-2 text-xs font-bold rounded-lg bg-amber-500 text-slate-950";
+                document.getElementById('tabRetraitBtn').className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400";
+            } else {
+                document.getElementById('sectionDepot').classList.add('hidden');
+                document.getElementById('sectionRetrait').classList.remove('hidden');
+                document.getElementById('tabRetraitBtn').className = "flex-1 py-2 text-xs font-bold rounded-lg bg-amber-500 text-slate-950";
+                document.getElementById('tabDepotBtn').className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400";
+            }
+        }
+
+        function submitDepot() {
+            const amount = parseInt(document.getElementById('depotAmount').value);
+            if (isNaN(amount) || amount < 3000) {
+                alert("Le montant minimum de dépôt est de 3 000 FCFA.");
+                return;
+            }
+
+            currentDepotAmount = amount;
+
+            // Ouvrir la modal PayDunya
+            document.getElementById('paydunyaModal').classList.remove('hidden');
+
+            // Injecter dynamiquement le script PayDunya si pas encore chargé
+            const container = document.getElementById('paydunyasocialshop-page');
+            container.innerHTML = 'Veuillez patienter pendant le chargement de votre page PayDunya Social Shop...';
+
+            if (!document.getElementById('paydunyaScriptLoaded')) {
+                const resizerScript = document.createElement('script');
+                resizerScript.type = 'text/javascript';
+                resizerScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.11/iframeResizer.min.js';
+                document.head.appendChild(resizerScript);
+
+                const pdScript = document.createElement('script');
+                pdScript.id = 'paydunyaScriptLoaded';
+                pdScript.type = 'text/javascript';
+                pdScript.async = true;
+                pdScript.src = 'https://ecommerce.paydunya.com/rasofrancetTY8pA4.js';
+                document.head.appendChild(pdScript);
+            }
+        }
+
+        function closePaydunyaModal() {
+            document.getElementById('paydunyaModal').classList.add('hidden');
+        }
+
+        function confirmPaydunyaDeposit() {
+            state.balance += currentDepotAmount;
+            state.transactions.unshift({
+                type: 'Dépôt (PayDunya)',
+                amount: currentDepotAmount,
+                status: 'Succès',
+                date: new Date().toLocaleTimeString()
+            });
+            saveState();
+            alert("Paiement validé ! Votre solde a été crédité de " + currentDepotAmount.toLocaleString() + " FCFA.");
+            closePaydunyaModal();
+        }
+
+        function submitRetrait() {
+            const gmtHour = new Date().getUTCHours();
+            const isOpen = (gmtHour >= 15 || gmtHour < 6);
+            if (!isOpen) {
+                alert("Les retraits sont fermés actuellement. Heures d'ouverture : 15h00 GMT à 06h00 GMT.");
+                return;
+            }
+
+            if (state.activeProducts.length === 0) {
+                alert("Condition de retrait : Vous devez posséder au moins un produit équipé actif.");
+                return;
+            }
+
+            const amount = parseInt(document.getElementById('retraitAmount').value);
+            const phone = document.getElementById('retraitPhone').value.trim();
+
+            if (isNaN(amount) || amount < 2000) {
+                alert("Le montant minimum de retrait est de 2 000 FCFA.");
+                return;
+            }
+
+            if (!phone) {
+                alert("Veuillez entrer votre numéro de réception YasTogo / Flooz.");
+                return;
+            }
+
+            if (amount > state.balance) {
+                alert("Solde insuffisant pour ce retrait.");
+                return;
+            }
+
+            if (!state.hasDiscoveredTax) {
+                state.hasDiscoveredTax = true;
+                const tax = amount * 0.20;
+                const netAmount = amount - tax;
+                const confirmMsg = "INFORMATION TAXE SUR RETRAIT (20%):\n\n" +
+                                   "Montant demandé : " + amount + " FCFA\n" +
+                                   "Taxe appliquée (20%) : " + tax + " FCFA\n" +
+                                   "Montant NET que vous recevrez : " + netAmount + " FCFA\n\n" +
+                                   "Voulez-vous confirmer cette demande de retrait ?";
+                if (!confirm(confirmMsg)) {
+                    saveState();
+                    return;
+                }
+            }
+
+            state.balance -= amount;
+            state.transactions.unshift({
+                type: 'Retrait',
+                amount: amount,
+                status: 'En attente Admin',
+                date: new Date().toLocaleTimeString()
+            });
+
+            alert("Demande de retrait enregistrée. L'administrateur validera le paiement sous peu.");
+            saveState();
+        }
+
+        function tryAccessWhatsappAdmin() {
+            alert("Produit à équiper d'abord 15000fr et payer direct");
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            const chat = document.getElementById('chatMessages');
+            const userDiv = document.createElement('div');
+            userDiv.className = 'bg-amber-500/20 p-2.5 rounded-xl max-w-[80%] ml-auto text-amber-200 border border-amber-500/30';
+            userDiv.innerText = msg;
+            chat.appendChild(userDiv);
+
+            input.value = '';
+
+            setTimeout(() => {
+                const aiDiv = document.createElement('div');
+                aiDiv.className = 'bg-slate-700/60 p-2.5 rounded-xl max-w-[80%] text-slate-200';
+                aiDiv.innerText = "Message reçu et transmis à l'administrateur rasofranceT. Une réponse vous sera communiquée sous peu.";
+                chat.appendChild(aiDiv);
+                chat.scrollTop = chat.scrollHeight;
+            }, 800);
+        }
+
+        function shareInviteLink() {
+            const link = window.location.href + "?ref=" + Math.floor(Math.random() * 899999 + 100000);
+            navigator.clipboard.writeText(link).then(() => {
+                alert("Lien de parrainage copié dans le presse-papier :\n" + link + "\n\nPartagez-le sur WhatsApp & Facebook pour toucher vos commissions de 10% et 20% !");
+            }).catch(() => {
+                alert("Partagez ce lien avec vos amis : " + link);
+            });
+        }
+
+        function updateUI() {
+            document.getElementById('balanceDisplay').innerText = state.balance.toLocaleString() + ' FCFA';
+            document.getElementById('p1Count').innerText = `Possédé: ${state.purchasedCounts[1]} / 2`;
+            document.getElementById('p2Count').innerText = `Possédé: ${state.purchasedCounts[2]} / 5`;
+
+            const btn30k = document.getElementById('btnBonus30k');
+            if (state.claimedBonuses[1]) {
+                btn30k.innerText = "Déjà réclamé";
+                btn30k.className = "mt-2 w-full py-1 text-[10px] bg-emerald-600 text-white rounded-lg font-bold";
+                btn30k.disabled = true;
+            } else if (state.purchasedCounts[1] >= 2 && state.purchasedCounts[2] >= 1) {
+                btn30k.innerText = "Réclamer 30 000 FCFA";
+                btn30k.className = "mt-2 w-full py-1 text-[10px] gold-gradient text-slate-950 rounded-lg font-bold shadow";
+                btn30k.disabled = false;
+            }
+
+            const btn100k = document.getElementById('btnBonus100k');
+            if (state.claimedBonuses[2]) {
+                btn100k.innerText = "Déjà réclamé";
+                btn100k.className = "mt-2 w-full py-1 text-[10px] bg-emerald-600 text-white rounded-lg font-bold";
+                btn100k.disabled = true;
+            } else if (state.purchasedCounts[2] >= 5) {
+                btn100k.innerText = "Réclamer 100 000 FCFA";
+                btn100k.className = "mt-2 w-full py-1 text-[10px] gold-gradient text-slate-950 rounded-lg font-bold shadow";
+                btn100k.disabled = false;
+            }
+
+            const list = document.getElementById('equippedList');
+            list.innerHTML = '';
+            if (state.activeProducts.length === 0) {
+                list.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Aucun produit équipé pour le moment.</p>`;
+            } else {
+                const hasVipEquipped = state.purchasedCounts[2] >= 1;
+                state.activeProducts.forEach(prod => {
+                    const elapsedDays = (Date.now() - prod.purchaseTime) / (1000 * 3600 * 24);
+                    let statusText = "En activité (Génération active)";
+                    let canHarvest = true;
+
+                    if (prod.type === 1) {
+                        if (elapsedDays > 8 && !hasVipEquipped) {
+                            statusText = "Génération de revenus ARRETÉE (Délai de 3j expiré sans VIP 15 000 FCFA)";
+                            canHarvest = false;
+                            prod.status = 'stopped';
+                        } else if (elapsedDays > 5 && !hasVipEquipped) {
+                            statusText = "Période de grâce (Équipement VIP 15 000 FCFA requis sous peu)";
+                        } else if (hasVipEquipped) {
+                            statusText = "Revenus débloqués À VIE (VIP 15 000 FCFA Actif)";
+                        }
+                    }
+
+                    const item = document.createElement('div');
+                    item.className = "bg-slate-800 p-3 rounded-xl border border-slate-700 flex justify-between items-center";
+                    item.innerHTML = `
+                        <div>
+                            <p class="text-xs font-bold text-white">${prod.name}</p>
+                            <p class="text-[10px] text-amber-400 font-semibold">${statusText}</p>
+                            <p class="text-[10px] text-slate-400">Achats : ${new Date(prod.purchaseTime).toLocaleDateString()}</p>
+                        </div>
+                        <button onclick="harvestEarnings(${prod.id})" class="px-3 py-1.5 ${canHarvest ? 'gold-gradient' : 'bg-slate-700 text-slate-500'} text-slate-950 font-bold text-[11px] rounded-lg shadow" ${canHarvest ? '' : 'disabled'}>
+                            Récolter
+                        </button>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+
+            const gmtHour = new Date().getUTCHours();
+            const isOpen = (gmtHour >= 15 || gmtHour < 6);
+            const statusBox = document.getElementById('timeStatusBox');
+            if (isOpen) {
+                statusBox.className = "p-2.5 rounded-xl bg-emerald-500/20 text-emerald-300 text-xs text-center font-semibold border border-emerald-500/30";
+                statusBox.innerHTML = `<i class="fa-solid fa-door-open mr-1"></i> Retraits OUVERTS (15h00 - 06h00 GMT)`;
+            } else {
+                statusBox.className = "p-2.5 rounded-xl bg-rose-500/20 text-rose-300 text-xs text-center font-semibold border border-rose-500/30";
+                statusBox.innerHTML = `<i class="fa-solid fa-door-closed mr-1"></i> Retraits FERMÉS actuellement (Réouverture à 15h00 GMT)`;
+            }
+
+            const history = document.getElementById('transactionHistory');
+            if (state.transactions.length === 0) {
+                history.innerHTML = `<p class="text-center py-2">Aucune transaction enregistrée.</p>`;
+            } else {
+                history.innerHTML = state.transactions.map(t => `
+                    <div class="flex justify-between items-center bg-slate-900 p-2 rounded-lg border border-slate-700/50">
+                        <div>
+                            <span class="font-bold text-white">${t.type}</span>
+                            <span class="text-[10px] text-slate-400 block">${t.date}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-amber-400">${t.amount.toLocaleString()} FCFA</span>
+                            <span class="text-[10px] text-slate-400 block">${t.status}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        loadState();
+        setInterval(updateUI, 10000);
+    </script>
+</body>
+</html>
